@@ -2,7 +2,7 @@
   /**
    *  Quick contact class to complement basic ajax contact forms.
    *  Uses basic php mail() & saves submissions to JSON file.
-   *  There is no validation here. This isn't your all in one solution, just a quick skeleton.
+   *  There is no validation here. This isn't your all in one solution, just a quick working skeleton.
    *
    *  @author Alexandre Lotte <alexlotte16@gmail.com>
    *
@@ -137,27 +137,34 @@
 
 
 
-// =========================
-// Basic usage example here
-// =========================
+// =================================
+// Basic usage example here.
+// This should already work with an
+// ajax POST request to this file.
+// =================================
 
-// Required fields
+// Required fields (basic validation)
 if (array_key_exists('email', $_POST) && array_key_exists('subject', $_POST) && array_key_exists('message', $_POST)) {
+  if ($_POST["email"] != "" && $_POST["subject"] != "" && $_POST["message"] != "") {
 
-    // Instantiate
-    $quickContact = new EasyContact($_POST, "alexlotte16@gmail.com");
 
-    // Chose settings, defaults: sendMail = true, saveJson = true
-    $quickContact->sendMail = false;
+      // Instantiate
+      $quickContact = new EasyContact($_POST, "youremailhere@domain.com");
 
-    // Launch toggled functions and check for failure
-    // better error management when i'll care.. probably never
-    if ($quickContact->go()) {
-      echo "Success";
-    } else {
-      echo "Error";
-    }
+      // Chose settings, defaults: sendMail = true, saveJson = true
+      $quickContact->sendMail = false;
 
+      // Launch toggled functions and check for failure
+      // better error management when i'll care.. probably never
+      if ($quickContact->go()) {
+        echo "Success";
+      } else {
+        echo "Error";
+      }
+
+
+
+  }
 }
 
 

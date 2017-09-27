@@ -108,6 +108,7 @@
       }
 
 
+
       // If this is the first saved submission
       if (!file_exists("submissions.json")) {
         $newFile = fopen("submissions.json", "w");
@@ -120,7 +121,13 @@
       $jsonString = file_get_contents('submissions.json');
       $submissions = json_decode($jsonString, true);
 
-      // Add some data to it
+
+      // Add an index id to the current submission at the begining of the array (very optional)
+      $submission["id"] = count($submissions);
+      $submission = array('id' => $submission['id']) + $submission;
+
+
+      // Add current submission to the array
       $submissions[] = $submission;
 
       // Save it back to the file
